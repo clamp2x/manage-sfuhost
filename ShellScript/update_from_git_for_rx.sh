@@ -2,7 +2,7 @@
  
 # Copyright (C) 2017 Study For Us HOSTING (https://hosting.studyforus.com)
 # Auto Copying Tool From Git Repository
-# Version infomation : 0.1 (Proto type)
+# Version infomation : 1.0
 # License : The MIT License (MIT)
  
 # Define Vars
@@ -16,12 +16,14 @@ if [ ! -d $WEB_DIR/$GIT_DIR/.git ]; then
   echo "Start git clone progress"
   mkdir -p $WEB_DIR/$GIT_DIR
   git clone $GIT_SOURCE $WEB_DIR/$GIT_DIR/
+  # Copying Git files to Web Directory by rsync
+  rsync -avr --exclude='$GIT_DIR' $WEB_DIR/$GIT_DIR/ $WEB_DIR/
 fi
  
  
 # Checking updates and patches from Git repository
 cd $WEB_DIR/$GIT_DIR
+git stash
 git pull
- 
-# Copying Git files to Web Directory by rsync
-rsync -avr --exclude='$GIT_DIR' $WEB_DIR/$GIT_DIR/ $WEB_DIR/
+git stash apply
+git stash clear
