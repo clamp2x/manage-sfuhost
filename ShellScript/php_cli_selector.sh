@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.2.1 (Proto type)
+# Version information : 0.3 (Proto type)
 # License : The MIT License (MIT)
 
 
@@ -34,20 +34,21 @@ do
   read phpversion
   case "$phpversion" in
     "0" ) echo "PHP 7.0 is selected"
-          read php7.0 ;;
+          php7.0 ;;
     "1" ) echo "PHP 7.1 is selected"
-          read php7.1 ;;
+          php7.1 ;;
     "2" ) echo "PHP 7.2 is selected"
-          read php7.2 ;;
+          php7.2 ;;
     "3" ) echo "PHP 7.3 is selected"
-          read php7.3 ;;
+          php7.3 ;;
     "4" ) echo "PHP 7.4 is selected"
-          read php7.4 ;;
+          php7.4 ;;
   esac
 done
 
 
 # php 버전이 설치 되어 있나 확인
+echo "checking php version."
 if [ ! -f /var/www/clients/client%cn/web$wn/usr/bin/$phpversion ]; then
   echo "There is not php version to change."
   echo "Start to copy php version to change."
