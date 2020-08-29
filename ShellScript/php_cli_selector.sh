@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.6 (Proto type)
+# Version information : 0.6.1 (Proto type)
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -61,7 +61,7 @@ clear
 
 # php 버전이 설치 되어 있나 확인
 echo "checking php version."
-if [ ! -f /var/www/clients/client%cn/web$wn/usr/bin/$phpv ]; then
+if [ ! -f /var/www/clients/client$cn/web$wn/usr/bin/$phpv ]; then
   echo "There is not php version to change."
   echo "Start to copy php version to change."
   jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client%cn/web$wn $phpv
