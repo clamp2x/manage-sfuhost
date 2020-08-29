@@ -3,13 +3,13 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.1 (Proto type)
+# Version information : 0.1.1 (Proto type)
 # License : The MIT License (MIT)
 
 bt="PHP cli Version Selector"
 
 # client 번호 가져오기 
-cn=$(dialog --clear --keep-tide --backtitle "$bt" --title "Get client number" --inputbox "Input client number" 8 5)
+cn=$(dialog --clear --keep-tite --backtitle "$bt" --title "Get client number" --inputbox "Input client number" 8 5)
 if [ ! -d /var/www/clients/client$cn ]
 then
   dialog --infobox "Invaild client number." 5 20
@@ -17,7 +17,7 @@ then
 fi
 
 # web 번호 가져오기
-wn=$(dialog --clear --keep-tide --backtitle "$bt" --title "Get web number" --inputbox "Input web number" 8 5)
+wn=$(dialog --clear --keep-tite --backtitle "$bt" --title "Get web number" --inputbox "Input web number" 8 5)
 if [ ! -d /var/www/clients/client$cn/web$wn ]
 then
   dialog --infobox "Invaild web number." 5 20
@@ -26,7 +26,7 @@ fi
 
 # PHP 버전 선택
 versions=(0 "php7.0" 1 "php7.1" 2 "php7.2" 3 "php7.3" 4 "php7.4")
-phpv=$(dialog --clear --keep-tide --backtitle "$bt" --title "Select php version" --manu "Select PHP cli Version : " 15 40 6 "${versions[@]})
+phpv=$(dialog --clear --keep-tite --backtitle "$bt" --title "Select php version" --manu "Select PHP cli Version : " 15 40 6 "${versions[@]})
 clear
 case $phpv in
   0) dialog -- infobox "php7.0 selected" 5 20
