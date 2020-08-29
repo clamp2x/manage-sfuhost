@@ -16,7 +16,7 @@ echo -e -n "Enter Web number : "
 read wn
 
 echo "selected client # and web # is client$cn / web$wn"
-sleep 2
+sleep 1
 
 # 화면 클리어
 clear
@@ -61,18 +61,18 @@ done
 
 
 echo "the phpv var has been selected $phpv"
-sleep 2
+sleep 1
 
 # 화면 클리어
 clear
 
 # php 버전이 설치 되어 있나 확인
 echo "checking php version."
-if [ ! -f /var/www/clients/client%cn/web$wn/usr/bin/$phpversion ]; then
+if [ ! -f /var/www/clients/client%cn/web$wn/usr/bin/$phpv ]; then
   echo "There is not php version to change."
   echo "Start to copy php version to change."
-  #jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client%cn/web$wn $phpversion
-  else
+  #jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client%cn/web$wn $phpv
+else
   echo "selected php version is already copied."
 fi
 
@@ -81,7 +81,7 @@ fi
 echo "php alternatiove deleted."
 
 # php 버전 변경
-#ln -s /usr/bin/$phpversion /var/www/clients/client%cn/web$wn/etc/alternatives/php
+#ln -s /usr/bin/$phpv /var/www/clients/client%cn/web$wn/etc/alternatives/php
 echo "simbolic link created."
 
 # 완료.
