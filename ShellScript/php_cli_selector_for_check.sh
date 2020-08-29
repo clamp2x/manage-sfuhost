@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.3.1 (Proto type)
+# Version information : 0.5.5 (Proto type)
 # License : The MIT License (MIT)
 
 
