@@ -73,6 +73,7 @@ if [ ! -f /var/www/clients/client$cn/web$wn/usr/bin/$phpv ]; then
   echo ""
   echo "The php version to be changed does not exist, start copying php version to change."
   echo ""
+  echo "Copying files......"
   jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn $phpv 1>/dev/null
   echo "Copiying complete."
 else
