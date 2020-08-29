@@ -6,12 +6,17 @@
 # Version information : 0.5 (Proto type)
 # License : The MIT License (MIT)
 
+# 화면 클리어
+clear
 
 # 호스팅 정보 입력받기
 echo -e -n "Enter Client number : "
 read cn
 echo -e -n "Enter Web number : "
 read wn
+
+# 화면 클리어
+clear
 
 # PHP 버전 선택
 fMenu()
@@ -51,6 +56,8 @@ do
   esac
 done
 
+# 화면 클리어
+clear
 
 # php 버전이 설치 되어 있나 확인
 echo "checking php version."
