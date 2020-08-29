@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.8
+# Version information : 0.8.1
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -17,6 +17,13 @@ read wn
 
 # 화면 클리어
 clear
+
+# 선택된 client/web number 표시
+echo ""
+echo "client$cn / web$wn selected."
+echo ""
+echo ""
+echo ""
 
 # PHP 버전 선택
 fMenu()
@@ -60,11 +67,6 @@ done
 clear
 
 # php 버전이 설치 되어 있나 확인
-echo ""
-echo "client$cn / web$wn selected."
-echo ""
-echo ""
-echo ""
 echo "Checking php version."
 echo ""
 if [ ! -f /var/www/clients/client$cn/web$wn/usr/bin/$phpv ]; then
