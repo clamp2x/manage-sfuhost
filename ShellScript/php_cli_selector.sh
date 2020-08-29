@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.6.1 (Proto type)
+# Version information : 0.7
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -60,20 +60,32 @@ done
 clear
 
 # php 버전이 설치 되어 있나 확인
-echo "checking php version."
+echo "Checking php version."
+echo ""
 if [ ! -f /var/www/clients/client$cn/web$wn/usr/bin/$phpv ]; then
-  echo "There is not php version to change."
-  echo "Start to copy php version to change."
-  jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client%cn/web$wn $phpv
-  else
-  echo "selected php version is already copied."
+  echo ""
+  echo "The php version to be changed does not exist, start copying php version to change."
+  echo ""
+  jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn $phpv
+else
+  echo ""
+  echo "The php version to change already exists, so proceed to the next step."
+  echo ""
 fi
 
 # php altenative 버전 삭제
-rm /var/www/clients/client%cn/web$wn/etc/alternatives/php
+rm /var/www/clients/client$cn/web$wn/etc/alternatives/php
+echo ""
+echo "AAlternative php file has been removed."
+
 
 # php 버전 변경
-ln -s /usr/bin/$phpv /var/www/clients/client%cn/web$wn/etc/alternatives/php
+ln -s /usr/bin/$phpv /var/www/clients/client$cn/web$wn/etc/alternatives/php
+echo ""
+echo "A symbolic link has been created."
 
 # 완료.
-echo "php cli version has been changed."
+echo ""
+echo ""
+echo ""
+echo "All process has done. The php cli version has been changed."
