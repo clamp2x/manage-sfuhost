@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.7
+# Version information : 0.7.1
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -76,7 +76,7 @@ fi
 # php altenative 버전 삭제
 rm /var/www/clients/client$cn/web$wn/etc/alternatives/php
 echo ""
-echo "AAlternative php file has been removed."
+echo "Alternative php file has been removed."
 
 
 # php 버전 변경
