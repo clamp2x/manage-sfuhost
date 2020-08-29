@@ -34,15 +34,20 @@ do
   read phpversion
   case "$phpversion" in
     "0" ) echo "PHP 7.0 is selected"
-          php7.0 ;;
+          phpv=php7.0
+          break ;;
     "1" ) echo "PHP 7.1 is selected"
-          php7.1 ;;
+          phpv=php7.1
+          break ;;
     "2" ) echo "PHP 7.2 is selected"
-          php7.2 ;;
+          phpv=php7.2
+          break ;;
     "3" ) echo "PHP 7.3 is selected"
-          php7.3 ;;
+          phpv=php7.3
+          break ;;
     "4" ) echo "PHP 7.4 is selected"
-          php7.4 ;;
+          phpv=php7.4
+          break;;
   esac
 done
 
