@@ -89,6 +89,7 @@ else
               break ;;
       [Nn]* ) break ;;
     esac
+  done
 fi
 
 # php altenative 버전 삭제
