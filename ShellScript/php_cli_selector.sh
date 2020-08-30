@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.9.4
+# Version information : 0.9.5
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -79,7 +79,7 @@ if [ ! -f /var/www/clients/client$cn/web$wn/usr/bin/$phpv ]; then
 else
   echo ""
   # php 재설치 확인
-  while ture; do
+  while true; do
     read -p "The php version to change already exists, Do you want to re-install selected php version? : (y/n)" yn
     case $yn in
       [Yy]* ) echo ""
