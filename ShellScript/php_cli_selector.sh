@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.9.9.1
+# Version information : 1.0.0
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -139,19 +139,26 @@ ln -s /usr/bin/$phpv /var/www/clients/client$cn/web$wn/etc/alternatives/php
 echo ""
 echo "A symbolic link has been created."
 
-# composer 설치할건지 확인
-while true; do
-    read -p "Do you want to install composer? (y/n) : [n] " yorn
-    yorn=${yorn:-n}
-    case $yorn in
-        [Yy]* ) echo ""
-                echo "Copying composer files......"
-                jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn composer 1>/dev/null
-                echo "Copiying complete."
-                break ;;
-        [Nn]* ) break ;;
-    esac
-done
+
+# jailkit 재설치를 한 경우 composer 재설치 하지 않도록 조정
+if [ reset == "Y" || reset == "y"]; then
+  echo ""
+  echo "Already re-installed all of jailkit files."
+else
+  # composer 설치할건지 확인
+  while true; do
+      read -p "Do you want to install composer? (y/n) : [n] " yorn
+      yorn=${yorn:-n}
+      case $yorn in
+          [Yy]* ) echo ""
+                  echo "Copying composer files......"
+                  jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn composer 1>/dev/null
+                  echo "Copiying complete."
+                  break ;;
+          [Nn]* ) break ;;
+      esac
+  done
+fi
 
 # 완료.
 echo ""
