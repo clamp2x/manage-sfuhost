@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.9.9
+# Version information : 0.9.9.1
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -35,7 +35,7 @@ while true; do
             rm -rf /var/www/clients/client$cn/web$wn/bin/* /var/www/clients/client$cn/web$wn/dev/* /var/www/clients/client$cn/web$wn/etc/* /var/www/clients/client$cn/web$wn/lib/* /var/www/clients/client$cn/web$wn/lib64/* /var/www/clients/client$cn/web$wn/run/* /var/www/clients/client$cn/web$wn/usr/* /var/www/clients/client$cn/web$wn/var/*
             echo ""
             echo "Copying all of jailkit files to client$cn / web$wn ...."
-            jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn basicshell editors extendedshell netutils ssh sftp scp groups jk_lsh git php composer
+            jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn basicshell editors extendedshell netutils ssh sftp scp groups jk_lsh git php composer 1>/dev/null
             echo ""
             echo "Copying complete."
             break ;;
