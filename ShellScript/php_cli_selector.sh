@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.9.5
+# Version information : 0.9.8
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -24,6 +24,38 @@ echo "client$cn / web$wn selected."
 echo ""
 echo ""
 echo ""
+
+# jailkit 전체 재설치 확인
+while true; do
+  read -p "Do you want to re-install shell whole files? (y/n) : [n] " reset
+  reset=${reset:-n}
+  case $reset in
+    [Yy]* ) echo ""
+            echo "Copying all of jailkit files to client$cn / web$wn"
+            jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn basicshell editors extendedshell netutils ssh sftp scp groups jk_lsh git php composer
+            echo ""
+            echo "Copying complete."
+            break ;;
+    [Nn]* ) while true; do # 계속 설치를 진행할 것인지 확인
+               read -p "Would you like to keep going? (y/n) : [y] " kgo
+               kgo=${kgo:-y}
+               case $kgo in
+                  [Yy]* ) exit ;;
+                  [Nn]* ) break ;;
+               esac
+            done
+  esac
+done
+
+# 계속 설치를 진행할 것인지 확인
+#while true; do
+#    read -p "Would you like to keep going? (y/n) : [y] " kgo
+#    kgo=${kgo:-y}
+#    case $kgo in
+#        [Yy]* ) exit ;;
+#        [Nn]* ) break ;;
+#    esac
+#done
 
 # PHP 버전 선택
 fMenu()
@@ -80,7 +112,8 @@ else
   echo ""
   # php 재설치 확인
   while true; do
-    read -p "The php version to change already exists, Do you want to re-install selected php version? : (y/n)" yn
+    read -p "The php version to change already exists, Do you want to re-install selected php version? (y/n) : [n] " yn
+    yn = ${yn:-n}
     case $yn in
       [Yy]* ) echo ""
               echo "Copying files......"
@@ -105,7 +138,8 @@ echo "A symbolic link has been created."
 
 # composer 설치할건지 확인
 while true; do
-    read -p "Do you want to install composer? : (y/n)" yorn
+    read -p "Do you want to install composer? (y/n) : [n] " yorn
+    yorn=${yorn:-n}
     case $yorn in
         [Yy]* ) echo ""
                 echo "Copying composer files......"
