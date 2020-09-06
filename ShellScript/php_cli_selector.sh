@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 1.0.2
+# Version information : 1.1.0
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -42,26 +42,24 @@ while true; do
             echo ""
             echo "Copying complete."
             break ;;
-    [Nn]* ) while true; do # 계속 설치를 진행할 것인지 확인
-               read -p "Would you like to keep going? (y/n) : [y] " kgo
-               kgo=${kgo:-y}
-               case $kgo in
-                  [Yy]* ) exit ;;
-                  [Nn]* ) break ;;
-               esac
-            done
+    [Nn]* ) echo ""
+            echo "Pass to next progress..." 
+            break ;;
   esac
 done
 
 # 계속 설치를 진행할 것인지 확인
-#while true; do
-#    read -p "Would you like to keep going? (y/n) : [y] " kgo
-#    kgo=${kgo:-y}
-#    case $kgo in
-#        [Yy]* ) exit ;;
-#        [Nn]* ) break ;;
-#    esac
-#done
+if [ $reinst == "y" -o $reinst == "Y" ]; then
+  while true; do
+      read -p "Would you like to keep going? (y/n) : [y] " kgo
+      kgo=${kgo:-y}
+      case $kgo in
+          [Yy]* ) exit ;;
+          [Nn]* ) break ;;
+      esac
+  done
+fi
+  
 
 # PHP 버전 선택
 fMenu()
