@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 1.0.1
+# Version information : 1.0.2
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -144,7 +144,7 @@ echo "A symbolic link has been created."
 
 
 # jailkit 재설치를 한 경우 composer 재설치 하지 않도록 조정
-if [ reinst == "Y" || reinst == "y"]; then
+if [ reinst == "Y" -o reinst == "y" ]; then
   echo ""
   echo "Already re-installed all of jailkit files."
 else
