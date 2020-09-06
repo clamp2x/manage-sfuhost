@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 1.0.0
+# Version information : 1.0.1
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -27,12 +27,15 @@ echo ""
 
 # jailkit 전체 재설치 확인
 while true; do
-  read -p "Do you want to re-install shell whole files? (y/n) : [n] " reset
-  reset=${reset:-n}
-  case $reset in
+  read -p "Do you want to re-install shell whole files? (y/n) : [n] " reinst
+  reinst=${reinst:-n}
+  case $reinst in
     [Yy]* ) echo ""            
             echo "Deleting old jailkit files...."
             rm -rf /var/www/clients/client$cn/web$wn/bin/* /var/www/clients/client$cn/web$wn/dev/* /var/www/clients/client$cn/web$wn/etc/* /var/www/clients/client$cn/web$wn/lib/* /var/www/clients/client$cn/web$wn/lib64/* /var/www/clients/client$cn/web$wn/run/* /var/www/clients/client$cn/web$wn/usr/* /var/www/clients/client$cn/web$wn/var/*
+            echo ""
+            echo "This is client$cn/web$wn/bin/ files."
+            ls -al /var/www/clients/client$cn/web$wn/bin/
             echo ""
             echo "Copying all of jailkit files to client$cn / web$wn ...."
             jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn basicshell editors extendedshell netutils ssh sftp scp groups jk_lsh git php composer 1>/dev/null
@@ -141,7 +144,7 @@ echo "A symbolic link has been created."
 
 
 # jailkit 재설치를 한 경우 composer 재설치 하지 않도록 조정
-if [ reset == "Y" || reset == "y"]; then
+if [ reinst == "Y" || reinst == "y"]; then
   echo ""
   echo "Already re-installed all of jailkit files."
 else
