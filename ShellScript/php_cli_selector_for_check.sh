@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 0.6.5 (Proto type)
+# Version information : 1.0.0
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -15,11 +15,52 @@ read cn
 echo -e -n "Enter Web number : "
 read wn
 
-echo "selected client # and web # is client$cn / web$wn"
-sleep 1
-
 # 화면 클리어
 clear
+
+# 선택된 client/web number 표시
+echo ""
+echo "client$cn / web$wn selected."
+echo ""
+echo ""
+echo ""
+
+# jailkit 전체 재설치 확인
+while true; do
+  read -p "Do you want to re-install shell whole files? (y/n) : [n] " reset
+  reset=${reset:-n}
+  case $reset in
+    [Yy]* ) echo ""            
+            echo "Deleting old jailkit files...."
+            rm -rf /var/www/clients/client$cn/web$wn/bin/* /var/www/clients/client$cn/web$wn/dev/* /var/www/clients/client$cn/web$wn/etc/* /var/www/clients/client$cn/web$wn/lib/* /var/www/clients/client$cn/web$wn/lib64/* /var/www/clients/client$cn/web$wn/run/* /var/www/clients/client$cn/web$wn/usr/* /var/www/clients/client$cn/web$wn/var/*
+            echo "This is client$cn/web$wn/bin/ files."
+            ls -al /var/www/clients/client$cn/web$wn/bin/
+            echo ""
+            echo "Copying all of jailkit files to client$cn / web$wn ...."
+            jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn basicshell editors extendedshell netutils ssh sftp scp groups jk_lsh git php composer 1>/dev/null
+            echo ""
+            echo "Copying complete."
+            break ;;
+    [Nn]* ) while true; do # 계속 설치를 진행할 것인지 확인
+               read -p "Would you like to keep going? (y/n) : [y] " kgo
+               kgo=${kgo:-y}
+               case $kgo in
+                  [Yy]* ) exit ;;
+                  [Nn]* ) break ;;
+               esac
+            done
+  esac
+done
+
+# 계속 설치를 진행할 것인지 확인
+#while true; do
+#    read -p "Would you like to keep going? (y/n) : [y] " kgo
+#    kgo=${kgo:-y}
+#    case $kgo in
+#        [Yy]* ) exit ;;
+#        [Nn]* ) break ;;
+#    esac
+#done
 
 # PHP 버전 선택
 fMenu()
@@ -59,30 +100,72 @@ do
   esac
 done
 
-
-echo "the phpv var has been selected $phpv"
-sleep 1
-
 # 화면 클리어
 clear
 
 # php 버전이 설치 되어 있나 확인
-echo "checking php version."
-if [ ! -f /var/www/clients/client%cn/web$wn/usr/bin/$phpv ]; then
-  echo "There is not php version to change."
-  echo "Start to copy php version to change."
-  #jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client%cn/web$wn $phpv
+echo "Checking php version."
+echo ""
+if [ ! -f /var/www/clients/client$cn/web$wn/usr/bin/$phpv ]; then
+  echo ""
+  echo "The php version to be changed does not exist, start copying php version to change."
+  echo ""
+  echo "Copying files......"
+  jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn $phpv 1>/dev/null
+  echo "Copiying complete."
 else
-  echo "selected php version is already copied."
+  echo ""
+  # php 재설치 확인
+  while true; do
+    read -p "The php version to change already exists, Do you want to re-install selected php version? (y/n) : [n] " yn
+    yn = ${yn:-n}
+    case $yn in
+      [Yy]* ) echo ""
+              echo "Copying files......"
+              jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn $phpv 1>/dev/null
+              echo "Copiying complete."
+              break ;;
+      [Nn]* ) break ;;
+    esac
+  done
 fi
 
 # php altenative 버전 삭제
-#rm /var/www/clients/client%cn/web$wn/etc/alternatives/php
-echo "php alternatiove deleted."
+rm /var/www/clients/client$cn/web$wn/etc/alternatives/php
+echo ""
+echo "Alternative php file has been removed."
+
 
 # php 버전 변경
-#ln -s /usr/bin/$phpv /var/www/clients/client%cn/web$wn/etc/alternatives/php
-echo "simbolic link created."
+ln -s /usr/bin/$phpv /var/www/clients/client$cn/web$wn/etc/alternatives/php
+echo ""
+echo "A symbolic link has been created."
+
+
+# jailkit 재설치를 한 경우 composer 재설치 하지 않도록 조정
+if [ reset == "Y" || reset == "y"]; then
+  echo ""
+  echo "Already re-installed all of jailkit files."
+else
+  # composer 설치할건지 확인
+  while true; do
+      read -p "Do you want to install composer? (y/n) : [n] " yorn
+      yorn=${yorn:-n}
+      case $yorn in
+          [Yy]* ) echo ""
+                  echo "Copying composer files......"
+                  jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn composer 1>/dev/null
+                  echo "Copiying complete."
+                  break ;;
+          [Nn]* ) break ;;
+      esac
+  done
+fi
 
 # 완료.
-echo "php cli version has been changed."
+echo ""
+ls /var/www/clients/client$cn/web$wn/usr/bin/ | grep php
+ls -al /var/www/clients/client$cn/web$wn/etc/alternatives/php
+echo ""
+echo ""
+echo "All process has done. The php cli version has been changed."
