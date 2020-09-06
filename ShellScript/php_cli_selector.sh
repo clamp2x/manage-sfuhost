@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 1.1.0
+# Version information : 1.1.3
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -54,8 +54,8 @@ if [ $reinst == "y" -o $reinst == "Y" ]; then
       read -p "Would you like to keep going? (y/n) : [y] " kgo
       kgo=${kgo:-y}
       case $kgo in
-          [Yy]* ) exit ;;
-          [Nn]* ) break ;;
+          [Yy]* ) break ;;
+          [Nn]* ) exit ;;
       esac
   done
 fi
