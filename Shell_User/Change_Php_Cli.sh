@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 1.1.5
+# Version information : 1.2.0
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -26,40 +26,39 @@ echo ""
 echo ""
 
 # jailkit 전체 재설치 확인
-while true; do
-  read -p "Do you want to re-install shell whole files? (y/n) : [n] " reinst
-  reinst=${reinst:-n}
-  case $reinst in
-    [Yy]* ) echo ""            
-            echo "Deleting old jailkit files...."
-            rm -rf /var/www/clients/client$cn/web$wn/bin/* /var/www/clients/client$cn/web$wn/dev/* /var/www/clients/client$cn/web$wn/etc/* /var/www/clients/client$cn/web$wn/lib/* /var/www/clients/client$cn/web$wn/lib64/* /var/www/clients/client$cn/web$wn/run/* /var/www/clients/client$cn/web$wn/usr/* /var/www/clients/client$cn/web$wn/var/*
-            echo ""
-            echo "This is client$cn/web$wn/bin/ files."
-            ls -al /var/www/clients/client$cn/web$wn/bin/
-            echo ""
-            echo "Copying all of jailkit files to client$cn / web$wn ...."
-            jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn basicshell editors extendedshell netutils ssh sftp scp groups jk_lsh git php composer 1>/dev/null
-            echo ""
-            echo "Copying complete."
-            break ;;
-    [Nn]* ) echo ""
-            echo "Pass to next progress..." 
-            break ;;
-  esac
-done
+#while true; do
+#  read -p "Do you want to re-install shell whole files? (y/n) : [n] " reinst
+#  reinst=${reinst:-n}
+#  case $reinst in
+#    [Yy]* ) echo ""            
+#            echo "Deleting old jailkit files...."
+#            rm -rf /var/www/clients/client$cn/web$wn/bin/* /var/www/clients/client$cn/web$wn/dev/* /var/www/clients/client$cn/web$wn/etc/* /var/www/clients/client$cn/web$wn/lib/* /var/www/clients/client$cn/web$wn/lib64/* /var/www/clients/client$cn/web$wn/run/* /var/www/clients/client$cn/web$wn/usr/* /var/www/clients/client$cn/web$wn/var/*
+#            echo ""
+#            echo "This is client$cn/web$wn/bin/ files."
+#            ls -al /var/www/clients/client$cn/web$wn/bin/
+#            echo ""
+#            echo "Copying all of jailkit files to client$cn / web$wn ...."
+#            jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn basicshell editors extendedshell netutils ssh sftp scp groups jk_lsh git php composer 1>/dev/null
+#            echo ""
+#            echo "Copying complete."
+#            break ;;
+#    [Nn]* ) echo ""
+#            echo "Pass to next progress..." 
+#            break ;;
+#  esac
+#done
 
-# 계속 설치를 진행할 것인지 확인
-if [ $reinst == "y" -o $reinst == "Y" ]; then
-  while true; do
-      read -p "Would you like to keep going? (y/n) : [y] " kgo
-      kgo=${kgo:-y}
-      case $kgo in
-          [Yy]* ) break ;;
-          [Nn]* ) exit ;;
-      esac
-  done
-fi
-  
+## 계속 설치를 진행할 것인지 확인
+#if [ $reinst == "y" -o $reinst == "Y" ]; then
+#  while true; do
+#      read -p "Would you like to keep going? (y/n) : [y] " kgo
+#      kgo=${kgo:-y}
+#      case $kgo in
+#          [Yy]* ) break ;;
+#          [Nn]* ) exit ;;
+#      esac
+#  done
+#fi
 
 # PHP 버전 선택
 fMenu()
@@ -142,24 +141,39 @@ echo "A symbolic link has been created."
 
 
 # jailkit 재설치를 한 경우 composer 재설치 하지 않도록 조정
-if [ $reinst == "Y" -o $reinst == "y" ]; then
-  echo ""
-  echo "Already re-installed all of jailkit files."
-else
-  # composer 설치할건지 확인
-  while true; do
-      read -p "Do you want to install composer? (y/n) : [n] " yorn
-      yorn=${yorn:-n}
-      case $yorn in
-          [Yy]* ) echo ""
-                  echo "Copying composer files......"
-                  jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn composer 1>/dev/null
-                  echo "Copiying complete."
-                  break ;;
-          [Nn]* ) break ;;
-      esac
-  done
-fi
+#if [ $reinst == "Y" -o $reinst == "y" ]; then
+#  echo ""
+#  echo "Already re-installed all of jailkit files."
+#else
+#  # composer 설치할건지 확인
+#  while true; do
+#      read -p "Do you want to install composer? (y/n) : [n] " yorn
+#      yorn=${yorn:-n}
+#      case $yorn in
+#          [Yy]* ) echo ""
+#                  echo "Copying composer files......"
+#                  jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn composer 1>/dev/null
+#                  echo "Copiying complete."
+#                  break ;;
+#          [Nn]* ) break ;;
+#      esac
+#  done
+#fi
+
+# composer 설치할건지 확인
+while true; do
+    read -p "Do you want to install composer? (y/n) : [n] " yorn
+    yorn=${yorn:-n}
+    case $yorn in
+        [Yy]* ) echo ""
+                echo "Copying composer files......"
+                jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn composer 1>/dev/null
+                echo "Copiying complete."
+                break ;;
+        [Nn]* ) break ;;
+    esac
+done
+
 
 # 완료.
 echo ""
