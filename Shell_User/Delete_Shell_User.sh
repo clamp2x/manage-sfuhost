@@ -17,7 +17,7 @@ echo ""
 while true; do 
   # 호스팅 정보가 맞는지 확인하기
   echo ""
-  # ls -alF /var/www/ | grep client$cn/web$wn # 변수 정보를 사이트 이름으로 변경하는 것 작성중
+  # ls -alF /var/www/ | grep client$cn/web$wn | cut -d " " -f 19 # 변수 정보를 사이트 이름으로 변경하는 것 작성중(cut 명령어 공부 필요)
   read -p "You selected client $cn // web $wn, is it right? (y/n) : [y] " ynright
   ynright=${ynright:-y}
   case $ynright in
