@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Shell User Perfect remover
 # This script is able to use only on ispconfig
-# Version information : 0.1.0
+# Version information : 0.1.2
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -25,7 +25,9 @@ while true; do
             sleep 1
             break ;;
     [Nn]* ) echo ""
-            ./$(basename $0) && exit
+            ./$(basename $0) && exit ;;
+  esac
+done
 
 # 선택된 client/web number 표시
 echo ""
@@ -64,6 +66,7 @@ if [ $ynrec == "y" -o $ynrec == "Y" ]; then
   echo ""
   echo "Deleted only jailkit shell file."
   echo "You must re-create shell user again."
+  echo "The simple way is change Chroot shell option from None to jailkit." 
   echo ""
   echo ""
 else
