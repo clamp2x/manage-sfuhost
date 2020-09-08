@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Shell User Perfect remover
 # This script is able to use only on ispconfig
-# Version information : 0.1.2
+# Version information : 0.1.5
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -17,6 +17,7 @@ echo ""
 while true; do 
   # 호스팅 정보가 맞는지 확인하기
   echo ""
+  # ls -alF /var/www/ | grep client$cn/web$wn # 변수 정보를 사이트 이름으로 변경하는 것 작성중
   read -p "You selected client $cn // web $wn, is it right? (y/n) : [y] " ynright
   ynright=${ynright:-y}
   case $ynright in
