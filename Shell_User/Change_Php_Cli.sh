@@ -160,20 +160,28 @@ echo "A symbolic link has been created."
 #  done
 #fi
 
-# composer 설치할건지 확인
-while true; do
-    read -p "Do you want to install composer? (y/n) : [n] " yorn
-    yorn=${yorn:-n}
-    case $yorn in
-        [Yy]* ) echo ""
-                echo "Copying composer files......"
-                jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn composer 1>/dev/null
-                echo "Copiying complete."
-                break ;;
-        [Nn]* ) break ;;
-    esac
-done
-
+# composer 설치 확인
+if [ ! -f /var/www/clients/client$cn/web$wn/usr/bin/composer ]; then
+  echo ""
+  echo "There is no composer files, now copying composer files."
+  jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn composer 1>/dev/null
+  echo ""
+  echo "All composer files have been installed."
+else
+  # composer가 설치되어 있는 경우 다시 설치할 것인지 확인
+  while true; do
+      read -p "Do you want to re-install composer? (y/n) : [n] " yorn
+      yorn=${yorn:-n}
+      case $yorn in
+          [Yy]* ) echo ""
+                  echo "Copying composer files......"
+                  jk_init -c /etc/jailkit/jk_init.ini -f -k -j /var/www/clients/client$cn/web$wn composer 1>/dev/null
+                  echo "Copiying complete."
+                  break ;;
+          [Nn]* ) break ;;
+      esac
+  done
+fi
 
 # 완료.
 echo ""
