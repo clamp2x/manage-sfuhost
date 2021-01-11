@@ -11,7 +11,7 @@ then
     exit 1
 fi
 
-php composer-setup.php --quiet
+php composer-setup.php --quiet #--version=1.10.19
 RESULT=$?
 rm composer-setup.php
 mv composer.phar /usr/bin/composer
