@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 1.3.7
+# Version information : 1.4.0
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -19,6 +19,12 @@ site=`ls -alF /var/www/ | grep client$cn/web$wn/ | rev | cut -d " " -f 3 | rev`
 
 # 화면 클리어
 clear
+
+# 제대로된 폴더인지 확인
+if [ ! -d /var/www/clients/client$cn/web$wn ]; then
+  echo -e "There is no directory. Wrong client or web number.\n\n"
+  exit 1
+fi
 
 # 선택된 client/web number 표시
 echo ""
@@ -61,6 +67,12 @@ echo ""
 #      esac
 #  done
 #fi
+
+# 쉘 사용자인지 확인
+if [ ! -f /var/www/clients/client$cn/web$wn/etc/alternatives/php ]; then
+  echo -e "There is no shell user on $site.\n\n"
+  exit 1
+fi
 
 # 현재 설정되어 있는 PHP 버전 확인하기
 echo "All of installed PHP versions of $site."
