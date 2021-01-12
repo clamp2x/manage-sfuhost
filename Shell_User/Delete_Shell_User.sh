@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Shell User Perfect remover
 # This script is able to use only on ispconfig
-# Version information : 0.2.0
+# Version information : 0.3.0
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -13,6 +13,12 @@ clear
 read -p "Enter Client number : " cn
 read -p "Enter Web number : " wn
 echo ""
+
+# 사이트 번호 체크
+if [ ! -d /var/www/clients/client$cn/web$wn ]; then
+  echo -e "There is no directory. Wrong client or web number.\n\n"
+  exit 1
+fi
 
 while true; do 
   # 호스팅 정보가 맞는지 확인하기
