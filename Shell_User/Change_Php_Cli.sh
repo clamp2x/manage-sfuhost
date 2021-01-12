@@ -60,6 +60,14 @@ echo ""
 #  done
 #fi
 
+# 현재 설정되어 있는 PHP 버전 확인하기
+echo "All of installed PHP versions."
+ls /var/www/clients/client$cn/web$wn/usr/bin/ | grep php
+echo "\nCurrent PHP version."
+ls -al /var/www/clients/client$cn/web$wn/etc/alternatives/php
+echo ""
+echo ""
+
 # PHP 버전 선택
 fMenu()
 {
@@ -70,6 +78,7 @@ fMenu()
   echo "2. PHP 7.2"
   echo "3. PHP 7.3"
   echo "4. PHP 7.4"
+  echo "5. PHP 8.1"
 }
 
 while :
@@ -94,6 +103,9 @@ do
           break ;;
     "4" ) echo "PHP 7.4 is selected"
           phpv=php7.4
+          break;;
+    "5" ) echo "PHP 8.0 is selected"
+          phpv=php8.0
           break;;
   esac
 done
