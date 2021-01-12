@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 1.3.4
+# Version information : 1.3.5
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -78,7 +78,7 @@ fMenu()
   echo "2. PHP 7.2"
   echo "3. PHP 7.3"
   echo "4. PHP 7.4"
-  echo "5. PHP 8.1"
+  echo "5. PHP 8.0"
 }
 
 while :
