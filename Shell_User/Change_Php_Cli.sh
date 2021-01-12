@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Study For Us HOSTING (https://hosting.studyforus.com)
 # Changing PHP cli version via jailkit for each users.
 # This script is able to use only on ispconfig
-# Version information : 1.3.1
+# Version information : 1.3.4
 # License : The MIT License (MIT)
 
 # 화면 클리어
@@ -14,6 +14,7 @@ echo -e -n "Enter Client number : "
 read cn
 echo -e -n "Enter Web number : "
 read wn
+cphp=`ls -al /var/www/clients/client$cn/web$wn/etc/alternatives/php | rev | cut -c1-6 | rev`
 
 # 화면 클리어
 clear
@@ -63,8 +64,7 @@ echo ""
 # 현재 설정되어 있는 PHP 버전 확인하기
 echo "All of installed PHP versions."
 ls /var/www/clients/client$cn/web$wn/usr/bin/ | grep php
-echo "\nCurrent PHP version."
-ls -al /var/www/clients/client$cn/web$wn/etc/alternatives/php
+echo -e "\nCurrent PHP version is $cphp"
 echo ""
 echo ""
 
@@ -196,9 +196,9 @@ else
 fi
 
 # 완료.
-echo ""
+echo "All of installed PHP versions."
 ls /var/www/clients/client$cn/web$wn/usr/bin/ | grep php
-ls -al /var/www/clients/client$cn/web$wn/etc/alternatives/php
+echo -e "\nCurrent PHP version is $cphp"
 echo ""
 echo ""
 echo "All process has done. The php cli version has been changed."
