@@ -214,8 +214,13 @@ fi
 
 # 완료.
 echo "All of installed PHP versions of $site."
+echo "===================================="
 ls /var/www/clients/client$cn/web$wn/usr/bin/ | grep php
-echo -e "\nCurrent PHP version is $cphp"
+echo "===================================="
+# 바뀐 php 버전 변수 지정
+ncphp=`ls -al /var/www/clients/client$cn/web$wn/etc/alternatives/php | rev | cut -c1-6 | rev`
+
+echo -e "\nCurrent PHP version is $ncphp"
 echo ""
 echo ""
 echo "All process has done. The php cli version has been changed."
